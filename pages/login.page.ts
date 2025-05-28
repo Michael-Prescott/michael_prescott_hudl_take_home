@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { LoginSelectors } from '../selectors/login.selectors';
-import { HUDL_LOGIN_URL } from "../fixtures/test-data";
+import { HUDL_LOGIN_URL, HUDL_USER_HOMEPAGE } from "../fixtures/test-data";
 
 export class LoginPage {
     private page: Page;
@@ -29,5 +29,9 @@ export class LoginPage {
 
     async clickContinue() {
         await this.submitButton.click();
+    }
+
+    async verifyLoginSuccessful() {
+        await expect(this.page).toHaveURL(HUDL_USER_HOMEPAGE);
     }
 }
