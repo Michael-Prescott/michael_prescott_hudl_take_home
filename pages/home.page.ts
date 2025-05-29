@@ -13,7 +13,9 @@ export class HomePage {
         this.hudlLoginOption = page.locator(HomeSelectors.hudlLoginOption);
     }
 
-    async navigate() {
+    async navigateToLoginPage() {
         await this.page.goto(HUDL_URL)
+        await this.loginDropdown.click();
+        await this.hudlLoginOption.click();
     }
 }

@@ -7,12 +7,14 @@ export class LoginPage {
     private usernameInput: Locator;
     private passwordInput: Locator;
     private submitButton: Locator;
+    private invalidUsernameMessage: Locator;
 
     constructor(page: Page) {
         this.page = page;
         this.usernameInput = page.locator(LoginSelectors.usernameInput);
         this.passwordInput = page.locator(LoginSelectors.passwordInput);
-        this.submitButton = page.locator(LoginSelectors.submitButton);
+        this.submitButton = page.locator(LoginSelectors.continueButton);
+        this.invalidUsernameMessage = page.locator(LoginSelectors.invalidUsernameMessage);
     }
 
     async navigate() {
@@ -33,5 +35,9 @@ export class LoginPage {
 
     async verifyLoginSuccessful() {
         await expect(this.page).toHaveURL(HUDL_USER_HOMEPAGE);
+    }
+
+    async verifyInvalidEmail() {
+        await expect(this.invalidUsernameMessage).toBeVisible();
     }
 }
