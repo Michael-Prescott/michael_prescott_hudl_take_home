@@ -1,4 +1,6 @@
 export const UserDashboardSelectors = {
     userDropdown: 'title[id="uiexpandregionverticalTitle"]',
-    logoutButton: 'a[data-qa-id="webnav-usermenu-logout"]'
+    logoutButton: 'a[data-qa-id="webnav-usermenu-logout"]',
+    userDashboardHomeContent: 'div[id="home-content"]',
+    userDashboardNavBar: 'div[id="ssr-webnav"]'
 }

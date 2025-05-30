@@ -5,20 +5,24 @@ import { UserDashboardPage } from "../pages/userdashboard.page";
 import { HomePage } from "../pages/home.page";
 
 type TestFixtures = {
+    homePage: HomePage;
     loginPage: LoginPage;
-}
+    userDashboardPage: UserDashboardPage;
+};
 
 export const test = base.extend<TestFixtures>({
-    loginPage: async ({ page }, use) => {
-        if(await page.locator(UserDashboardSelectors.userDropdown).isVisible()) {
-            const userDashboardPage = new UserDashboardPage(page);
-            userDashboardPage.logoutUser();
-            userDashboardPage.verifyLogoutSuccessful();
-        }
+    homePage: async ({ page }, use) => {
         const homePage = new HomePage(page);
-        homePage.navigateToLoginPage();
-    
+        await homePage.navigateToLoginPage();
+    },
+
+    loginPage: async ({ page }, use) => {    
         const loginPage = new LoginPage(page);
         await use(loginPage)
+    },
+
+    userDashboardPage: async ({ page }, use) => {
+        const homePage = new HomePage(page);
+        await homePage.navigateToLoginPage();
     }
 });

@@ -21,4 +21,9 @@ export class UserDashboardPage {
     async verifyLogoutSuccessful() {
         await expect(this.page).toHaveURL(HUDL_URL);
     }
+
+    async verifyUserIsOnUserDashboardPage() {
+        await expect(this.page.locator(UserDashboardSelectors.userDashboardNavBar)).toBeVisible();
+        await expect(this.page.locator(UserDashboardSelectors.userDashboardHomeContent)).toBeVisible();
+    }
 }
