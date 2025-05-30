@@ -1,3 +1,4 @@
+// Selectors for the Hudl login page
 export const LoginSelectors = {
     usernameInput: 'input[id="username"]',
     passwordInput: 'input[id="password"]',
