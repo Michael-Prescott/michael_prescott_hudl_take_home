@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 import { HomeSelectors } from '../selectors/home.selectors';
 import { HUDL_URL } from "../fixtures/test-data";
 

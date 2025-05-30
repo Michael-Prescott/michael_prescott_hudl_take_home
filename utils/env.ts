@@ -12,3 +12,6 @@ export const config = {
     username: process.env.USERNAME!,
     password: process.env.PASSWORD!
 };
+
+// Environment constants for different operating systems
+export const MACOS = 'darwin';

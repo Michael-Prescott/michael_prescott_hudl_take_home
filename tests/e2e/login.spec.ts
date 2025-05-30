@@ -4,9 +4,8 @@
  * account creation, and social media sign-in options.
  */
 
-import { HomeSelectors } from '../../selectors/home.selectors';
 import { test } from '../../fixtures/test-fixtures';
-import { config } from "../../utils/env";
+import { config, MACOS } from "../../utils/env";
 import { INVALID_PASSWORD, INVALID_USERNAME, NONEXISTANT_USERNAME, SAMPLE_NAME } from '../../fixtures/test-data';
 import { UserDashboardPage } from '../../pages/userdashboard.page';
 
@@ -18,7 +17,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - User lands on the user dashboard page after logging in with valid credentials
      */
-    test('Logging in with valid credentials navigates user to user dashboard page', async ({ page, loginPage }) => {
+    test('TC1: Logging in with valid credentials navigates user to user dashboard page', async ({ page, loginPage }) => {
         await loginPage.loginWithCredentials(config.username, config.password);
         
         const userDashboardPage = new UserDashboardPage(page);
@@ -30,7 +29,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - The login page does not display a password input field without a username being entered
      */
-    test('Log in page prevents user from entering password without a username', async ({ loginPage }) => {
+    test('TC2: Log in page prevents user from entering password without a username', async ({ loginPage }) => {
         await loginPage.clickContinue();
         await loginPage.verifyUserOnUsernameInputPage();
     });
@@ -40,7 +39,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - Entering an improperly formatted email address displays an error message
      */
-    test('Log in page does not allow user to use an improperly formatted email address', async ({ loginPage }) => {
+    test('TC3: Log in page does not allow user to use an improperly formatted email address', async ({ loginPage }) => {
         await loginPage.enterUsername(INVALID_USERNAME);
         await loginPage.clickContinue();
         await loginPage.verifyInvalidEmailMessagePresent();
@@ -51,7 +50,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - The login page displays an invalid password message when an incorrect password is entered
      */
-    test('Log in page displays error message when user enters a valid email address and invalid password', async ({ loginPage }) => {
+    test('TC4: Log in page displays error message when user enters a valid email address and invalid password', async ({ loginPage }) => {
         await loginPage.enterUsername(config.username);
         await loginPage.clickContinue();
         await loginPage.enterPassword(INVALID_PASSWORD);
@@ -64,7 +63,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - The login page displays an invalid password message when a non-existent email address and an incorrect password are entered
      */
-    test('Log in page displays error message when user enter invalid email address and invalid password', async ({ loginPage }) => {
+    test('TC5: Log in page displays error message when user enter invalid email address and invalid password', async ({ loginPage }) => {
         await loginPage.enterUsername(NONEXISTANT_USERNAME);
         await loginPage.clickContinue();
         await loginPage.enterPassword(INVALID_PASSWORD);
@@ -77,7 +76,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - Clicking the edit username button navigates the user back to the username input page
      */
-    test('Edit username button navigates user back to username entry', async ({ loginPage }) => {
+    test('TC6: Edit username button navigates user back to username entry', async ({ loginPage }) => {
         await loginPage.enterUsername(config.username);
         await loginPage.clickContinue();
         await loginPage.clickEditUsername();
@@ -89,7 +88,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - The create account page does not generate an account when there is no first name entered
      */
-    test('Create account screen prevents user from creating account without a first name', async ({ loginPage }) => {
+    test('TC7: Create account screen prevents user from creating account without a first name', async ({ loginPage }) => {
         await loginPage.clickCreateAccount();
         await loginPage.enterLastName(SAMPLE_NAME);
         await loginPage.enterEmailAddress(NONEXISTANT_USERNAME);
@@ -102,7 +101,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - The create account page does not generate an account when there is no last name entered
      */
-    test('Create account screen prevents user from creating account without a last name', async ({ loginPage }) => {
+    test('TC8: Create account screen prevents user from creating account without a last name', async ({ loginPage }) => {
         await loginPage.clickCreateAccount();
         await loginPage.enterFirstName(SAMPLE_NAME);
         await loginPage.enterEmailAddress(NONEXISTANT_USERNAME);
@@ -115,7 +114,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - The create account page does not generate an account when there is no email address entered
      */
-    test('Create account screen prevents user from creating account without an email', async ({ loginPage }) => {
+    test('TC9: Create account screen prevents user from creating account without an email', async ({ loginPage }) => {
         await loginPage.clickCreateAccount();
         await loginPage.enterFirstName(SAMPLE_NAME);
         await loginPage.enterLastName(SAMPLE_NAME);
@@ -128,7 +127,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - Clicking the Google sign in button redirects the user to the Google authentication page
      */
-    test('Google sign in button navigates user to Google auth page', async ({ loginPage }) => {
+    test('TC10: Google sign in button navigates user to Google auth page', async ({ loginPage }) => {
         await loginPage.clickGoogleSignInButton();
         await loginPage.verifyUserDirectedToGoogleSignInPage();
     });
@@ -138,7 +137,7 @@ test.describe('Hudl Login Page Test Cases', () => {
      * Acceptance Criteria:
      * - Clicking the Facebook sign in button redirects the user to the Facebook authentication page
      */
-    test('Facebook sign in button navigates user to Facebook auth page', async ({ loginPage }) => {
+    test('TC11: Facebook sign in button navigates user to Facebook auth page', async ({ loginPage }) => {
         await loginPage.clickFacebookSignInButton();
         await loginPage.verifyUserDirectedToFacebookSignInPage();
     });
@@ -147,9 +146,13 @@ test.describe('Hudl Login Page Test Cases', () => {
      * TC12: Verify that the Apple sign in button navigates the user to the Apple authentication page
      * Acceptance Criteria:
      * - Clicking the Apple sign in button redirects the user to the Apple authentication page
-     * Note: This test is skipped due to OS issues when running on local machine
+     * Note: This test will be skipped if running on macOS due to OS level prompts interfering 
+     *       with the test execution when using Webkit browsers (i.e. Safari)
      */
-    test.skip('Apple sign in button navigates user to Apple auth page', async ({ loginPage }) => {
+    test('TC12: Apple sign in button navigates user to Apple auth page', async ({ loginPage }) => {
+        test.skip(process.platform === MACOS, 
+            'Skipping Apple sign in test on macOS due to OS level prompts interfering with the test execution');
+
         await loginPage.clickAppleSignInButton();
         await loginPage.verifyUserDirectedToAppleSignInPage();
     });

@@ -4,7 +4,6 @@ import {
     APPLE_SIGNIN_URL_REGEX,
     FACEBOOK_SIGNIN_URL_REGEX,
     GOOGLE_SIGNIN_URL_REGEX,
-    HUDL_LOGIN_URL,
     HUDL_USER_HOMEPAGE,
     INVALID_EMAIL_ADDRESS_MESSAGE,
     INVALID_PASSWORD_MESSAGE,
@@ -29,6 +28,9 @@ export class LoginPage {
     private createAccountButton: Locator;
     private invalidPasswordMessage: Locator;
     private editUsernameButton: Locator;
+    private firstNameInput: Locator;
+    private lastNameInput: Locator;
+    private emailInput: Locator;
 
 
     /**
@@ -45,6 +47,9 @@ export class LoginPage {
         this.invalidPasswordMessage = page.locator(LoginSelectors.invalidPasswordMessage);
         this.editUsernameButton = page.locator(LoginSelectors.editUsernameButton);
         this.createAccountButton = page.locator(LoginSelectors.createAccountButton);
+        this.firstNameInput = page.locator(LoginSelectors.firstNameInput);
+        this.lastNameInput = page.locator(LoginSelectors.lastNameInput);
+        this.emailInput = page.locator(LoginSelectors.emailInput);
     }
 
     // --------------- Data Entry Methods ---------------
@@ -70,7 +75,7 @@ export class LoginPage {
      * @param firstName - The first name to be entered on the create user page
      */
     async enterFirstName(firstName: string) {
-        await this.page.locator(LoginSelectors.firstNameInput).fill(firstName);
+        await this.firstNameInput.fill(firstName);
     }
 
     /**
@@ -78,7 +83,7 @@ export class LoginPage {
      * @param lastName - The last name to be entered on the create user page
      */
     async enterLastName(lastName: string) {
-        await this.page.locator(LoginSelectors.lastNameInput).fill(lastName);
+        await this.lastNameInput.fill(lastName);
     }
 
     /**
@@ -86,7 +91,7 @@ export class LoginPage {
      * @param email - The email address to be entered on the create user page
      */
     async enterEmailAddress(email: string) {
-        await this.page.locator(LoginSelectors.emailInput).fill(email);
+        await this.emailInput.fill(email);
     }
 
 
