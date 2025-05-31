@@ -13,7 +13,6 @@ import { HomePage } from "../pages/home.page";
  */
 type TestFixtures = {
     loginPage: LoginPage;
-    userDashboardPage: UserDashboardPage;
 };
 
 /**
@@ -32,12 +31,4 @@ export const test = base.extend<TestFixtures>({
         const loginPage = new LoginPage(page);
         await use(loginPage);
     },
-
-    /**
-     * Initializes the UserDashboardPage for verifying sucessful login attempts
-     */
-    userDashboardPage: async ({ page }, use) => {
-        const userDashboardPage = new UserDashboardPage(page);
-        await use(userDashboardPage);
-    }
 });

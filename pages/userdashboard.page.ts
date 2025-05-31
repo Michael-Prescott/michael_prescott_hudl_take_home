@@ -36,6 +36,8 @@ export class UserDashboardPage {
         await this.logoutButton.click()
     }
 
+    // --------------- Verification Methods ---------------
+
     /**
      * Verifies that the user has successfully logged out by checking the URL
      */
