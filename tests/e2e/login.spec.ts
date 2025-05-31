@@ -6,8 +6,14 @@
 
 import { test } from '../../fixtures/test-fixtures';
 import { config, MACOS } from "../../utils/env";
-import { INVALID_PASSWORD, INVALID_USERNAME, NONEXISTANT_USERNAME, SAMPLE_NAME } from '../../fixtures/test-data';
 import { UserDashboardPage } from '../../pages/userdashboard.page';
+import {
+    INVALID_PASSWORD,
+    INVALID_USERNAME,
+    NONEXISTANT_USERNAME,
+    SAMPLE_NAME
+} from '../../fixtures/test-data';
+
 
 // Hudl Login Page Test Scenarios
 test.describe('Hudl Login Page Test Cases', () => {
@@ -20,6 +26,7 @@ test.describe('Hudl Login Page Test Cases', () => {
     test('TC1: Logging in with valid credentials navigates user to user dashboard page', async ({ page, loginPage }) => {
         await loginPage.loginWithCredentials(config.username, config.password);
         
+        // Create an instance of the UserDashboardPage to verify the login was successful
         const userDashboardPage = new UserDashboardPage(page);
         await userDashboardPage.verifyUserIsOnUserDashboardPage();
     });

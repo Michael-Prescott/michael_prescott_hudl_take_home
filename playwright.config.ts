@@ -32,6 +32,13 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
+  /**
+   * Override the default expect timeout for all tests to account for random network/server slowdowns
+   */
+  expect: {
+    timeout: 10 * 1000 // 10 seconds
+  },
+
   /* Configure projects for major browsers */
   projects: [
     {

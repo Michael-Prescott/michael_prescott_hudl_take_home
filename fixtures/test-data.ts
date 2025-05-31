@@ -1,5 +1,5 @@
 /**
- * Reusable test data for the Hudl E2E tests
+ * Reusable test data for the Hudl UI tests
  */
 export const HUDL_URL = "https://www.hudl.com";
 export const HUDL_LOGIN_URL = "https://www.hudl.com/login";
